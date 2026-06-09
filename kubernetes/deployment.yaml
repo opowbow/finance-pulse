@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finance-pulse-deployment
+  labels:
+    app: finance-pulse
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: finance-pulse
+  template:
+    metadata:
+      labels:
+        app: finance-pulse
+    spec:
+      containers:
+      - name: finance-pulse
+        image: europe-west1-docker.pkg.dev/gkeop002/my-app-images/finance-pulse:latest
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
